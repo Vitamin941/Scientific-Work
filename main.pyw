@@ -30,7 +30,8 @@ class MyWindow(QtWidgets.QWidget):
 
     def event(self, e):
         """
-        Функция унаследованная у QWidget. Отвечает за обратку событий поступающих от пользователя
+        Функция унаследованная у QWidget. 
+        Отвечает за обратку событий поступающих от пользователя
         собственная реализация написана только для enter.
         :param e: event - событие поступающее от пользователя.
         :no return:
@@ -99,7 +100,7 @@ class MyWindow(QtWidgets.QWidget):
 
     def startSolve(self):
         """
-        Передаёт параметры в solver.py по нажатию enter и сразу вызывает функию solve
+        Передаёт параметры в solver.py по нажатию enter и сразу вызывает функцию solve
         solve - главная фунция решателя.
         :no return:
         """
