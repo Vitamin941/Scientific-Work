@@ -104,8 +104,8 @@ class MyWindow(QtWidgets.QWidget):
         solve - главная фунция решателя.
         :no return:
         """
-        solver.data = self.paramsToNums()
-        solver.solve()
+       #  solver.data = self.paramsToNums()
+       #  solver.solve()
 
     def paramsToNums(self):
         """
