@@ -8,7 +8,6 @@ class MyWindow(QtWidgets.QWidget):
         QtWidgets.QWidget.__init__(self, parent)
 
         # инитиализация надписей
-        self.labelInformer = QtWidgets.QLabel('Informer')
         self.labelList = (
             QtWidgets.QLabel('Начальное состояние системы:'),
             QtWidgets.QLabel('Конечное состояние системы:'),
@@ -49,8 +48,7 @@ class MyWindow(QtWidgets.QWidget):
         """
         for label in self.labelList:
             label.setFont(QtGui.QFont('Times', 10))  # Установка размера и стиля шрифта
-        self.labelInformer.setFont(QtGui.QFont('Times', 12))
-
+     
     def setSettingsToLineEdit(self):
         """
         Добавление некоторых свойств к однострочным полям ввода.
@@ -74,10 +72,6 @@ class MyWindow(QtWidgets.QWidget):
         # Добавление конструкций формата(надпись - текстовое поле)
         for label, lineEdit in zip(self.labelList, self.lineEditList):
             self.form.addRow(label, lineEdit)
-
-        # Добавление информационной надписи
-        self.labelInformer.setAlignment(QtCore.Qt.AlignHCenter)
-        self.form.addRow(self.labelInformer)
 
     def getText(self):
         """
