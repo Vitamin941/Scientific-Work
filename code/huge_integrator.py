@@ -19,47 +19,40 @@ def integrate_matrix():
 		[q61(), q62(), q63(), q64(), q65(), q66()]
 	])
 
-def replace_syms_to_nums(expression):
-    return expression.replace(t0, t0_num)\
-        .replace(t1, t1_num)\
-        .replace(t2, t2_num)\
-        .replace(T, T_num)
-
-
 def q11():
-	part_one = integrate(2 * (t1 - tau) ** 2 + 4 * (t1 - tau) * (t2 - tau), integral_range_1)
-	part_two = integrate(2 * (t2 - tau) ** 2, integral_range_2)
+	part_one = integrate(2 * (time_moments.get("t1") - tau) ** 2 + 4 * (time_moments.get("t1") - tau) * (time_moments.get("t2") - tau), integral_range_1)
+	part_two = integrate(2 * (time_moments.get("t2") - tau) ** 2, integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)
 
 def q12():
-	part_one = integrate(4 * (t1 - tau) + 2 * (t2 - tau), integral_range_1)
-	part_two = integrate(2 * (t2 - tau), integral_range_2)
+	part_one = integrate(4 * (time_moments.get("t1") - tau) + 2 * (time_moments.get("t2") - tau), integral_range_1)
+	part_two = integrate(2 * (time_moments.get("t2") - tau), integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)	
 
 def q13():
-	part_one = integrate((T - tau) * (t1 - tau), integral_range_1)
-	part_two = integrate((T - tau) * (t2 - tau), integral_range_2)
+	part_one = integrate((time_moments.get("T") - tau) * (time_moments.get("t1") - tau), integral_range_1)
+	part_two = integrate((time_moments.get("T") - tau) * (time_moments.get("t2") - tau), integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)	
 
 
 def q14():
-	part_one = integrate((t1 - tau), integral_range_1)
-	part_two = integrate((t2 - tau), integral_range_2)
+	part_one = integrate((time_moments.get("t1") - tau), integral_range_1)
+	part_two = integrate((time_moments.get("t2") - tau), integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)
 
 def q15():
-	part_one = integrate((T - tau) * (t1 - tau), integral_range_1)
-	part_two = integrate((T - tau) * (t2 - tau), integral_range_2)
+	part_one = integrate((time_moments.get("T") - tau) * (time_moments.get("t1") - tau), integral_range_1)
+	part_two = integrate((time_moments.get("T") - tau) * (time_moments.get("t2") - tau), integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)
 
 def q16():
-	part_one = integrate((t1 - tau), integral_range_1)
-	part_two = integrate((t2 - tau), integral_range_2)
+	part_one = integrate((time_moments.get("t1") - tau), integral_range_1)
+	part_two = integrate((time_moments.get("t2") - tau), integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)
 
 def q21():
-	part_one = integrate(4 * (t1 - tau) + 2 * (t2 - tau), integral_range_1)
-	part_two = integrate(2 * (t2 - tau), integral_range_2)
+	part_one = integrate(4 * (time_moments.get("t1") - tau) + 2 * (time_moments.get("t2") - tau), integral_range_1)
+	part_two = integrate(2 * (time_moments.get("t2") - tau), integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)
 
 def q22():
@@ -68,8 +61,8 @@ def q22():
 	return replace_syms_to_nums(part_one + part_two)
 
 def q23():
-	part_one = integrate((T - tau), integral_range_1)
-	part_two = integrate((T - tau), integral_range_2)
+	part_one = integrate((time_moments.get("T") - tau), integral_range_1)
+	part_two = integrate((time_moments.get("T") - tau), integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)
 
 def q24():
@@ -78,8 +71,8 @@ def q24():
 	return replace_syms_to_nums(part_one + part_two)
 
 def q25():
-	part_one = integrate((T - tau), integral_range_1)
-	part_two = integrate((T - tau), integral_range_2)
+	part_one = integrate((time_moments.get("T") - tau), integral_range_1)
+	part_two = integrate((time_moments.get("T") - tau), integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)
 
 def q26():
@@ -88,20 +81,20 @@ def q26():
 	return replace_syms_to_nums(part_one + part_two)
 
 def q31():
-	part_one = integrate((T - tau) * (t1 - tau), integral_range_1)
-	part_two = integrate((T - tau) * (t2 - tau), integral_range_2)
+	part_one = integrate((time_moments.get("T") - tau) * (time_moments.get("t1") - tau), integral_range_1)
+	part_two = integrate((time_moments.get("T") - tau) * (time_moments.get("t2") - tau), integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)
 
 def q32():
-	part_one = integrate((T - tau), integral_range_1)
-	part_two = integrate((T - tau), integral_range_2)
+	part_one = integrate((time_moments.get("T") - tau), integral_range_1)
+	part_two = integrate((time_moments.get("T") - tau), integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)
 
 def q33():
-	return replace_syms_to_nums(integrate((T - tau)** 2,integral_range_3))
+	return replace_syms_to_nums(integrate((time_moments.get("T") - tau)** 2,integral_range_3))
 
 def q34():
-	return replace_syms_to_nums(integrate(T - tau,integral_range_3))
+	return replace_syms_to_nums(integrate(time_moments.get("T") - tau,integral_range_3))
 
 def q35():
 	return 0
@@ -110,8 +103,8 @@ def q36():
 	return 0
 
 def q41():
-	part_one = integrate(t1 - tau, integral_range_1)
-	part_two = integrate(t2 - tau, integral_range_2)
+	part_one = integrate(time_moments.get("t1") - tau, integral_range_1)
+	part_two = integrate(time_moments.get("t2") - tau, integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)
 
 def q42():
@@ -120,7 +113,7 @@ def q42():
 	return replace_syms_to_nums(part_one + part_two)
 
 def q43():
-	return replace_syms_to_nums(integrate(T - tau,integral_range_3))
+	return replace_syms_to_nums(integrate(time_moments.get("T") - tau,integral_range_3))
 
 def q44():
 	return replace_syms_to_nums(integrate(1, integral_range_3))
@@ -132,13 +125,13 @@ def q46():
 	return 0
 
 def q51():
-	part_one = integrate((T - tau) * (t1 - tau), integral_range_1)
-	part_two = integrate((T - tau) * (t2 - tau), integral_range_2)
+	part_one = integrate((time_moments.get("T") - tau) * (time_moments.get("t1") - tau), integral_range_1)
+	part_two = integrate((time_moments.get("T") - tau) * (time_moments.get("t2") - tau), integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)
 
 def q52():
-	part_one = integrate((T - tau), integral_range_1)
-	part_two = integrate((T - tau), integral_range_2)
+	part_one = integrate((time_moments.get("T") - tau), integral_range_1)
+	part_two = integrate((time_moments.get("T") - tau), integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)
 
 def q53():
@@ -148,14 +141,14 @@ def q54():
  	return 0
 
 def q55():
-	return replace_syms_to_nums(integrate((T - tau)** 2,integral_range_3))
+	return replace_syms_to_nums(integrate((time_moments.get("T") - tau)** 2,integral_range_3))
 
 def q56():
-	return replace_syms_to_nums(integrate(T - tau,integral_range_3))
+	return replace_syms_to_nums(integrate(time_moments.get("T") - tau,integral_range_3))
 
 def q61():
-	part_one = integrate(t1 - tau,integral_range_1)
-	part_two = integrate(t2 - tau, integral_range_2)
+	part_one = integrate(time_moments.get("t1") - tau,integral_range_1)
+	part_two = integrate(time_moments.get("t2") - tau, integral_range_2)
 	return replace_syms_to_nums(part_one + part_two)
 
 def q62():
@@ -170,7 +163,7 @@ def q64():
 	return 0
 
 def q65():
-	return replace_syms_to_nums(integrate(T - tau,integral_range_3))
+	return replace_syms_to_nums(integrate(time_moments.get("T") - tau,integral_range_3))
 
 def q66():
 	return replace_syms_to_nums(integrate(1 ,integral_range_3))
