@@ -8,7 +8,6 @@ from huge_integrator import integrate_matrix
 
 sp.init_printing(use_unicode=False, wrap_line=True)
 
-
 x_0 = Matrix([
     [0], [0], [0], [0]
 ])
@@ -67,6 +66,7 @@ def F_func(time_arg):
     """
     return F * X(time_moments.get("t1"), time_arg) + F * X(time_moments.get("t2"), time_arg)
 
+
 F_matr = {
     "tau": F_func(tau),
     "t": F_func(t),
@@ -78,11 +78,14 @@ b = X(time_moments.get("T"), tau) * B
 H = a.col_join(b)
 Q = H * H.T
 
+
 def find_tetta_vector():
-    column_1 = alpha - F_matr.get("t0") * x_0 - (integrate(F * X(time_moments.get("t1"), t),(t,t0_num,t1_num)) * f)\
-         - (integrate(F * X(time_moments.get("t2"), t),(t,t0_num,t2_num)) * f)
-    column_2 = x_T - X(time_moments.get("T"), time_moments.get("t0")) * x_0 - integrate(X(time_moments.get("T"), t) * f, (t, t0_num, T_num))
+    column_1 = alpha - F_matr.get("t0") * x_0 - (integrate(F * X(time_moments.get("t1"), t), (t, t0_num, t1_num)) * f) \
+               - (integrate(F * X(time_moments.get("t2"), t), (t, t0_num, t2_num)) * f)
+    column_2 = x_T - X(time_moments.get("T"), time_moments.get("t0")) * x_0 - integrate(X(time_moments.get("T"), t) * f,
+                                                                                        (t, t0_num, T_num))
     return replace_syms_to_nums(column_1.col_join(column_2))
+
 
 tetta = find_tetta_vector()
 Q_integrated = integrate_matrix()
@@ -90,5 +93,3 @@ Q_integrated = integrate_matrix()
 
 def sumator(m: int):
     result = 0
-   
-
