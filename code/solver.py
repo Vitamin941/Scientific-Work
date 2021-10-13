@@ -4,9 +4,9 @@ import sympy as sp
 from sympy import Matrix, integrate, pprint
 
 from static import *
-from huge_integrator import integrate_matrix
+from integrator import integrate_matrix
 
-sp.init_printing(use_unicode=False, wrap_line=True)
+sp.init_printing(use_unicode=False, wrap_line=False)
 
 x_0 = Matrix([
     [0], [0], [0], [0]
@@ -27,19 +27,7 @@ F = Matrix([
 
 
 def X(time_moment=None, tau=tau):
-    """
-    :param t:
-    :param tau:
-    :return:
-    """
-
     def x(time_moment_start, time_moment_end, ind: List[int]):
-        """
-        :param t:
-        :param T:
-        :param ind:
-        :return:
-        """
         if ind[0] == ind[1]:
             return 1
         else:
@@ -90,6 +78,39 @@ def find_tetta_vector():
 tetta = find_tetta_vector()
 Q_integrated = integrate_matrix()
 
+def u(tau):
+    u = [0] * 3
+    zero_matrix = Matrix([
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+        ])
+    sum_ = F * X(time_moments.get("t1"),tau)  + F * X(time_moments.get("t2"),tau)
+    u[0] = replace_syms_to_nums(sp.simplify(B.T * sum_.T.row_join(X(time_moments.get('T'), tau).T) * Q_integrated.inv() * tetta))
+    
+    u[1] = replace_syms_to_nums(sp.simplify(B.T * (F * X(time_moments.get("t2"),tau)).T.row_join(X(time_moments.get('T'), tau).T) * Q_integrated.inv() * tetta))
+    
+    u[2] = replace_syms_to_nums(sp.simplify(B.T * zero_matrix.T.row_join(X(time_moments.get('T'), tau).T) * Q_integrated.inv() * tetta))
+    return u
 
-def sumator(m: int):
-    result = 0
+
+mov_1 = integrate(X(t, tau) * B * u(tau)[0], (tau, 0, t)) + integrate(X(t, tau) * f, (tau, 0, t))
+int_1 = integrate(X(t, tau) * B * u(tau)[1], (tau, 1, t)) +  integrate(X(t, tau) * B * u(tau)[0], (tau, 0, 1))
+mov_2 = int_1 + integrate(X(t, tau) * f, (tau, 0, t))
+int_2 = integrate(X(t, tau) * B * u(tau)[1], (tau, t1_num, t2_num)) +  integrate(X(t, tau) * B * u(tau)[0], (tau, t0_num, t1_num)) + integrate(X(t, tau) * B * u(tau)[2], (tau, t2_num, t)) 
+mov_3 = int_2 + integrate(X(t, tau) * f, (tau, 0, t))
+#pprint(integrate(X(time_moments.get('t0'), tau) * f, (tau, t0_num, t)))
+
+pprint(replace_syms_to_nums(sp.expand(sp.simplify(mov_1))))
+print("-------------------------------------------")
+pprint(replace_syms_to_nums(sp.simplify(mov_2)))
+print("-------------------------------------------")
+pprint(replace_syms_to_nums(sp.simplify(mov_3)))
+print("-------------------------------------------")
+pprint(replace_syms_to_nums(sp.simplify(F * mov_2 + F * mov_3)))
+#sum_1 = F * X[time_moments.get("t1"),time_moments.get("t0")] * x_0 + F * X[time_moments.get](tau,0,t)
+
+
+#pprint(X(t, tau) * B * u(tau)[1])
+#pprint(integrate(X(t, tau) * B * u(tau)[1],(tau,0,t)))
+#pprint(X(t, tau) * f)
+#pprint(integrate(X(t, tau) * f,(tau,0,t)))
