@@ -8,7 +8,6 @@ class MyWindow(QtWidgets.QWidget):
         QtWidgets.QWidget.__init__(self, parent)
 
         # инитиализация надписей
-        self.labelInformer = QtWidgets.QLabel('Informer')
         self.labelList = (
             QtWidgets.QLabel('Начальное состояние системы:'),
             QtWidgets.QLabel('Конечное состояние системы:'),
@@ -30,7 +29,8 @@ class MyWindow(QtWidgets.QWidget):
 
     def event(self, e):
         """
-        Функция унаследованная у QWidget. Отвечает за обратку событий поступающих от пользователя
+        Функция унаследованная у QWidget. 
+        Отвечает за обратку событий поступающих от пользователя
         собственная реализация написана только для enter.
         :param e: event - событие поступающее от пользователя.
         :no return:
@@ -48,8 +48,7 @@ class MyWindow(QtWidgets.QWidget):
         """
         for label in self.labelList:
             label.setFont(QtGui.QFont('Times', 10))  # Установка размера и стиля шрифта
-        self.labelInformer.setFont(QtGui.QFont('Times', 12))
-
+     
     def setSettingsToLineEdit(self):
         """
         Добавление некоторых свойств к однострочным полям ввода.
@@ -74,10 +73,6 @@ class MyWindow(QtWidgets.QWidget):
         for label, lineEdit in zip(self.labelList, self.lineEditList):
             self.form.addRow(label, lineEdit)
 
-        # Добавление информационной надписи
-        self.labelInformer.setAlignment(QtCore.Qt.AlignHCenter)
-        self.form.addRow(self.labelInformer)
-
     def getText(self):
         """
         Собирает данные из полей ввода и добавляет их в список. При добавлении проверяет являются корректными.
@@ -99,12 +94,12 @@ class MyWindow(QtWidgets.QWidget):
 
     def startSolve(self):
         """
-        Передаёт параметры в solver.py по нажатию enter и сразу вызывает функию solve
+        Передаёт параметры в solver.py по нажатию enter и сразу вызывает функцию solve
         solve - главная фунция решателя.
         :no return:
         """
-        solver.data = self.paramsToNums()
-        solver.solve()
+       #  solver.data = self.paramsToNums()
+       #  solver.solve()
 
     def paramsToNums(self):
         """
