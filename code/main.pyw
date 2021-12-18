@@ -1,7 +1,6 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
-
-import solver
-
+from solver import solve
+from sympy import Matrix
 
 class MyWindow(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -11,13 +10,12 @@ class MyWindow(QtWidgets.QWidget):
         self.labelList = (
             QtWidgets.QLabel('Начальное состояние системы:'),
             QtWidgets.QLabel('Конечное состояние системы:'),
-            QtWidgets.QLabel('Начальный промежуток времени:'),
-            QtWidgets.QLabel('Конечный промежуток времени:')
+            QtWidgets.QLabel('Промежутки времени:'),
         )
         self.setSettingsToLabel()
 
         # инитиализация полей ввода
-        self.lineEditList = tuple([QtWidgets.QLineEdit() for _ in range(4)])
+        self.lineEditList = tuple([QtWidgets.QLineEdit() for _ in range(3)])
         self.setSettingsToLineEdit()
 
         # инитиализация менеджера компоновки
@@ -48,20 +46,15 @@ class MyWindow(QtWidgets.QWidget):
         """
         for label in self.labelList:
             label.setFont(QtGui.QFont('Times', 10))  # Установка размера и стиля шрифта
-     
+
     def setSettingsToLineEdit(self):
         """
         Добавление некоторых свойств к однострочным полям ввода.
         Вынесено в отдельную функцию, чтобы не засорять init.
         :no return:
         """
-        for pos, lineEdit in enumerate(self.lineEditList):
-            if pos < 2:
-                lineEdit.setInputMask("Вектор: 9,9,9,9;_")  # Установка маски ввода
-            else:
-                lineEdit.setValidator(QtGui.QIntValidator(0, 100))
-                lineEdit.setPlaceholderText("Введите значение:")  # Установка подсказки
-
+        for lineEdit in self.lineEditList:
+            lineEdit.setInputMask("Вектор: 9,9,9,9;_")  # Установка маски ввода
     def addToWidgetsLayout(self):
         """
         Добавляет все компонненты в Layout(Компновщик, используется FormLayout)
@@ -90,7 +83,7 @@ class MyWindow(QtWidgets.QWidget):
         (Если параметр является некорректным, то он в param_list не добавляется)
         :return: bool значение.
         """
-        return len(self.getText()) == 4
+        return len(self.getText()) == 3
 
     def startSolve(self):
         """
@@ -98,8 +91,16 @@ class MyWindow(QtWidgets.QWidget):
         solve - главная фунция решателя.
         :no return:
         """
-       #  solver.data = self.paramsToNums()
-       #  solver.solve()
+        data = self.paramsToNums()
+        x0, xT, times = self.parse_input_args(data)
+        solve(x0, xT)
+
+
+    def parse_input_args(self, data):
+        vectors, times = data[0:2],data[2]
+        x0 = Matrix(vectors[0])
+        xT = Matrix(vectors[1])
+        return x0, xT, times
 
     def paramsToNums(self):
         """
@@ -110,11 +111,9 @@ class MyWindow(QtWidgets.QWidget):
         num_poses_in_text = [8, 10, 12, 14]
         num_data = []
         data = self.getText()
-        for index in range(4):
-            if index < 2:
-                num_data.append([int(num) for ind in num_poses_in_text for num in data[index][ind]])
-            else:
-                num_data.append(int(data[index]))
+        print(data)
+        for index in range(3):
+            num_data.append([int(num) for ind in num_poses_in_text for num in data[index][ind]])
         return num_data
 
 
