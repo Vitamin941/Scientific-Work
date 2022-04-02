@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 from solver import solve
 from sympy import Matrix
 
+
 class MyWindow(QtWidgets.QWidget):
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
@@ -55,6 +56,7 @@ class MyWindow(QtWidgets.QWidget):
         """
         for lineEdit in self.lineEditList:
             lineEdit.setInputMask("Вектор: 9,9,9,9;_")  # Установка маски ввода
+
     def addToWidgetsLayout(self):
         """
         Добавляет все компонненты в Layout(Компновщик, используется FormLayout)
@@ -95,9 +97,8 @@ class MyWindow(QtWidgets.QWidget):
         x0, xT, times = self.parse_input_args(data)
         solve(x0, xT)
 
-
     def parse_input_args(self, data):
-        vectors, times = data[0:2],data[2]
+        vectors, times = data[0:2], data[2]
         x0 = Matrix(vectors[0])
         xT = Matrix(vectors[1])
         return x0, xT, times
@@ -108,12 +109,10 @@ class MyWindow(QtWidgets.QWidget):
         Это происходит здесь, чтобы solver.py  не тратил на это время.
         :return: num_data - список параметров переведённый в List(int) и просто int зависимости от поставленной задачи
         """
-        num_poses_in_text = [8, 10, 12, 14]
         num_data = []
         data = self.getText()
-        print(data)
-        for index in range(3):
-            num_data.append([int(num) for ind in num_poses_in_text for num in data[index][ind]])
+        for row in data:
+            num_data.append(eval(row[8:]))
         return num_data
 
 
