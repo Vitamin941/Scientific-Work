@@ -37,6 +37,8 @@ class MyWindow(QtWidgets.QWidget):
         if e.type() == QtCore.QEvent.KeyPress:
             if e.key() == QtCore.Qt.Key_Return and self.isParamsCorrect():
                 self.startSolve()
+            elif e.key() == QtCore.Qt.Key_Return and not self.isParamsCorrect():
+                print('Введённые параметры некорректны')
         return QtWidgets.QWidget.event(self, e)
 
     def setSettingsToLabel(self):
@@ -94,8 +96,8 @@ class MyWindow(QtWidgets.QWidget):
         :no return:
         """
         data = self.paramsToNums()
-        x0, xT, times = self.parse_input_args(data)
-        solve(x0, xT)
+        x0, xT, times_num = self.parse_input_args(data)
+        solve(x0, xT, times_num)
 
     def parse_input_args(self, data):
         vectors, times = data[0:2], data[2]
@@ -118,7 +120,6 @@ class MyWindow(QtWidgets.QWidget):
 
 if __name__ == '__main__':
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     window = MyWindow()
     window.setWindowTitle("Python Application")
