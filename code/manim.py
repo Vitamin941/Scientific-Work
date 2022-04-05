@@ -1,10 +1,17 @@
-from manim import *
+from manimlib import *
 
 
-class Axes(Scene):
-
+class FlyingDot(Scene):
     def construct(self):
-        my_plane = NumberPlane()
-        my_plane.add(my_plane.get_axis_labels())
-        self.add(my_plane)
-        self.wait(10)
+        number_plane = NumberPlane(
+            (-10, 10),
+            (-5, 5),
+            background_line_style={
+                "stroke_color": BLUE,  # Цвет линии
+                "stroke_width": 2,  # Ширина линии
+                "stroke_opacity": 1  # Прозрачность
+            },
+            faded_line_ratio=1  # Кол-во линий в одном квадрате
+        )
+        self.add(number_plane)
+
