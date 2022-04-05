@@ -1,9 +1,8 @@
-from sympy import Matrix, expand, symbols, Symbol, init_printing, pprint
+from sympy import Matrix, expand, symbols, Symbol
 from functions import *
-from graph import Figure
+from util_result import Figure, write_to_file
 
-def solve(x0, xT):
-    init_printing(use_unicode=False, use_latex=True)
+def solve(x0, xT,writer='txt'):
     B = Matrix([
         [0, 0], [1, 0], [0, 0], [0, 1]
     ])
@@ -25,7 +24,8 @@ def solve(x0, xT):
 
     u = control(tau, Q_integrated, tetta)
     move = movement(u)
-    pprint(move, num_columns=200)
+    write_to_file(move,'txt')
+
     figure = Figure(move, u)
     figure.plot_move()
 

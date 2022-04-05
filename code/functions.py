@@ -3,7 +3,7 @@ import sympy as sp
 
 t = Symbol('t')
 times = [Symbol('t0'), Symbol('t1'), Symbol('t2'), Symbol('T')]
-t0_num, t1_num, t2_num, T_num = 0, 1, 2, 3
+t0_num, t1_num, t2_num, T_num = 0,1,2,3
 
 tau = Symbol('tau')
 g = Symbol('g')
@@ -35,6 +35,9 @@ A = Matrix([
 integral_range_1 = (tau, t0_num, t1_num)
 integral_range_2 = (tau, t0_num, t2_num)
 integral_range_3 = (tau, t0_num, T_num)
+
+def init_times(times):
+    t0_num, t1_num, t2_num, T_num = times
 
 def replace_syms_to_nums(expression, times):
     return expression.replace(times[0], t0_num) \
