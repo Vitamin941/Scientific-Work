@@ -24,10 +24,8 @@ You can find my presentations in the folder called "Presentation"
 --
 
 ### Conferences I've been to (with this work):
-  ~~~~2021:
     2021:ISU conference (participant): Irkutsk at the Irkutsk State University
     2021:ESI conference (participant): Irkutsk at the L. A. Melentyev Institute of Energy Systems 
-  ~~~~2022:
     2022:ISU conference (participant): Irkutsk at the Irkutsk State University
 
   
