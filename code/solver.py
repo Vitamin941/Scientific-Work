@@ -2,7 +2,7 @@ from sympy import Matrix, expand, symbols, Symbol
 from functions import *
 from util_result import Figure, write_to_file
 
-def solve(x0, xT,writer='txt'):
+def solve(x0, xT,writer='latex'):
     B = Matrix([
         [0, 0], [1, 0], [0, 0], [0, 1]
     ])
@@ -24,7 +24,7 @@ def solve(x0, xT,writer='txt'):
 
     u = control(tau, Q_integrated, tetta)
     move = movement(u)
-    write_to_file(move,'txt')
+    write_to_file(move)
 
     figure = Figure(move, u)
     figure.plot_move()

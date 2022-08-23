@@ -12,7 +12,7 @@ current_path = os.path.dirname(os.path.realpath(sys.argv[0]))
 result_path = os.path.join(current_path, 'out')
 
 
-def write_to_file(move,writer='txt'):
+def write_to_file(move,writer='latex'):
     if not os.path.exists(result_path):
         print('Папка для хранения результатов создана')
         os.mkdir(result_path)
